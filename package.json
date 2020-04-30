@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "license": "MIT",
     "bin": {
-      "outside": "bin/outside"
+        "outside": "bin/outside"
     },
     "scripts": {},
     "devDependencies": {},
