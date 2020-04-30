@@ -1,0 +1,2 @@
+#!/usr/bin/env node //this is called a shebang. It basically tells the system this isn't a shell script and it should use a different interpreter.
+require('../')()
