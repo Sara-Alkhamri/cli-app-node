@@ -1,8 +1,8 @@
 const minimist = require('minimist')
-const minimist = require('minimist')
+const minimis = require('minimist')
 
 module.exports = () => {
-  const args = minimist(process.argv.slice(2))
+  const args = minimis(process.argv.slice(2))
   const cmd = args._[0]
 
   switch (cmd) {
