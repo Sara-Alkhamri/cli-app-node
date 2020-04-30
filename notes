@@ -1,0 +1,19 @@
+1. In order to run the bin file directly, we'll need to give it the correct filesystem permissions.
+If you're on UNIX, this is as easy as running chmod +x bin/outside
+
+2. add our binary to the package.json file
+    {
+  "name": "outside-cli",
+  "version": "1.0.0",
+  "license": "MIT",
+  "bin": {
+    "outside": "bin/outside"
+  },
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {}
+}
+
+3. npm install -g outside-cli
+
+4. Running npm link in the root of your project will symlink your binary file to the system path, making it accessible from anywhere by running 'outside'
