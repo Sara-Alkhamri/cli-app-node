@@ -17,3 +17,78 @@ If you're on UNIX, this is as easy as running chmod +x bin/outside
 3. npm install -g outside-cli
 
 4. Running npm link in the root of your project will symlink your binary file to the system path, making it accessible from anywhere by running 'outside'
+
+5. Parsing Commands and arguments:
+
+    - CLI app consists of Arguments and Commands.
+
+    - Arguments or "flags" are the values prepended with one or two hypens "-d", "--debug" etc.
+    - Arguments are used to pass arguments to our app.
+
+    -Commands are all of the other values that don't have a flag.
+    -Unlike commands, arguments don't need to be specified in any particular order.
+
+6. In order for our app to be useful at all, we'll need to parse those commands ands arguments, and turn them into an object. We could always jump into process.argv and try to do it ourselves, but let's install our first dependency called minimist to take care of this one for us.
+
+7. npm install --save minimist
+
+8. Create Expected Commands:
+    -There are a few commands and arguments that are expected to be in every CLI: help, --help and -h, which should obviously show help menus, and version, --version and -v which should output the current app version. We should also default to a main help menu if no command is specified.
+    -This can be easily implemented in our current setup by adding two cases to our switch statement, a default value for the cmd variable, and implementing some if statements for the help and version argument flags. Minimist automatically parses arguments to key/values, so running outside --version will make args.version equal true.
+
+9. Adding Another Command
+    -This can be easily accomplished by adding a new command file to the cmdr folder, add it to the switch statement, and a help 
+        menu if it has one.
+
+10. Since we can't measure the progress for our API call, we will install a basic spinner 'ora' to show something is happening.
+
+11. install axios for API 
+
+12. npm install --save axios ora
+
+13. Publishing To NPM
+
+- The last step to getting our library out into the wild is to publish it to a package manager. Since our app is written in Javascript, it makes sense to publish to NPM. Let's fill out our package.json a bit more:
+
+{
+  "name": "outside-cli",
+  "version": "1.0.0",
+  "description": "A CLI app that gives you the weather forecast",
+  "license": "MIT",
+  "homepage": "https://github.com/timberio/outside-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timberio/outside-cli.git"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "keywords": [
+    "weather",
+    "forecast",
+    "rain"
+  ],
+  "preferGlobal": true,
+  "bin": {
+    "outside": "bin/outside"
+  },
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {
+    "axios": "^0.18.0",
+    "minimist": "^1.2.0",
+    "ora": "^2.0.0"
+  }
+}
+- Setting engine will ensure anyone installing our app has an updated version of Node. Since we are using async/await syntax without transpilation, we are requiring Node 8.0 or above.
+- Setting preferGlobal will warn the user if installing with npm install --save rather than npm install --global.
+That's it! You can now run npm publish and your app will be available for download. If you want to take this a step further and release on other package managers (such as Homebrew), you can check out pkg or nexe, which help you bundle your app into a self-contained binary.
+
+Takeaways and Conclusion:
+
+-Bin files are the entry point of any CLI app, and should only invoke the main function.
+-Command files shouldn't be required until they're needed.
+-Always include Help and Version commands.
+-Keep Command files slim, their main purpose is to call functions and show user messages.
+-Always show an activity indicator.
+-Exit with the correct error codes.
