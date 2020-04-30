@@ -3,7 +3,7 @@ const axios = require('axios')
 module.exports = async (location) => {
   const results = await axios({
     method: 'get',
-    url: 'https://query.yahooapis.com/v1/public/yql',
+    url: 'https://weather-ydn-yql.media.yahoo.com/forecastrss',
     params: {
       format: 'json',
       q: `select item from weather.forecast where woeid in
