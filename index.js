@@ -1,8 +1,8 @@
 const minimist = require('minimist')
-const minimis = require('minimist')
+const error = require('./utils/error')
 
 module.exports = () => {
-  const args = minimis(process.argv.slice(2))
+  const args = minimist(process.argv.slice(2))
 
   let cmd = args._[0] || 'help'
 
@@ -33,7 +33,7 @@ module.exports = () => {
       break
 
     default:
-      console.error(`"${cmd}" is not a valid command!`)
+      error(`"${cmd}" is not a valid command!`)
       break
   }
 }
